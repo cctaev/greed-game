@@ -6,8 +6,6 @@ from datetime import date
 
 import requests
 
-from spider.utils.sleep_util import sleeper
-
 BASE_URL = "https://yunhq.sse.com.cn:32042/v1/sh1/line/{}"
 MAX_RETRIES = 3  # 最大失败重试次数
 RETRY_DELAY = 5  # 失败重试间隔时间（秒）
@@ -23,7 +21,7 @@ class SseStockLineSpider:
             for stock_code in self._stock_codes:
                 self._query_stock_line(stock_code)
                 print(f"股票代码：{stock_code} 已完成")
-                sleeper((10, 100), 'ms')
+                time.sleep(0.01)
         finally:
             print(f"所有股票代码已完成")
             self._session.close()
