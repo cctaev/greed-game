@@ -1,6 +1,11 @@
 #! /bin/bash
 
-rm -rf ./dist
+clean() {
+    rm -rf ./dist
+    rm -rf ./*.egg-info
+}
+
+clean
 uv build
-rm -rf ./*.egg-info
-uv pip install dist/greed_spider-0.1.0-py3-none-any.whl
+uv pip install dist/*.whl
+clean
